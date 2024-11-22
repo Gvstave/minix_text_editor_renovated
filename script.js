@@ -29,14 +29,18 @@ document.addEventListener('DOMContentLoaded', function () {
         trash.style.display = trash.style.display === 'none' ? 'block' : 'none';
     });
 
+function saveContents(){
+    localStorage.setItem(STORAGE_KEY_TITLE, title.value);
+        localStorage.setItem(STORAGE_KEY, editor.value);
+}
     // Save title to localStorage on input
     title.addEventListener('input', function () {
-        localStorage.setItem(STORAGE_KEY_TITLE, title.value);
+        saveContents();
     });
 
     // Save editor content to localStorage on input
     editor.addEventListener('input', function () {
-        localStorage.setItem(STORAGE_KEY, editor.value);
+        saveContents();
     });
 
     // Clear localStorage and reset the fields
@@ -74,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
             speechSynthesis.speak(message);
         } else {
-            alert("Speech is not supported in this browser.");
+            alert("Speech is not supported in this browser please try another browser.");
         }
     });
 
@@ -114,13 +118,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save(`${title.value}.pdf`);
+            const pdfName = title.value.trim() || "Untitled";
+pdf.save(`${pdfName}.pdf`);
+
+return pdfName;
         });
-        content.style.display = 'block';
     }
     
     function story() {
-    const book = 'The Real Moby Dick'
+    const book = `The Real Moby Dick`
     const text = `
 <h1 style="font-size: 2em; color: #1a73e8;">Moby-Dick; Or, The Whale</h1>
 <p style="font-style: italic;">By Herman Melville</p>
@@ -131,7 +137,7 @@ Call me <span style="font-weight: bold;">Ishmael</span>. Some years ago—never 
 This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.</p>
 <p style="text-align: justify;">Excerpt from <i><strong>Moby-Dick</strong></i>, published in 1851.</p>
 <p style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #666;">Note: <em>This website is still being emproved</em></p>`;
-   return (editor.value = text, content.innerHTML = editor.value, title.value = book);
+   return (title.value = book, editor.value = text, content.innerHTML = editor.value);
 }
 
     // Load content from localStorage
@@ -140,11 +146,11 @@ This is my substitute for pistol and ball. With a philosophical flourish Cato th
         const editorContent = localStorage.getItem(STORAGE_KEY);
 
         if (titleContent || editorContent) {
-            title.value = titleContent || "";
-            editor.value = editorContent || "";
-            content.innerHTML = editorContent || "";
+            title.value = titleContent;
+            editor.value = editorContent;
+            content.innerHTML = editorContent;
         } else {
-         return story();
+         story();
         }
     }
 
