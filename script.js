@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial setup
     title.disabled = true;
     trash.style.display = 'none';
-
+    
     // Toggle between edit and read-only mode
     editNote.addEventListener('click', function () {
         if (content.style.display === 'none') {
@@ -118,6 +118,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         content.style.display = 'block';
     }
+    
+    function story() {
+    const book = 'The Real Moby Dick'
+    const text = `
+<h1 style="font-size: 2em; color: #1a73e8;">Moby-Dick; Or, The Whale</h1>
+<p style="font-style: italic;">By Herman Melville</p>
+<h2 style="font-size: 1.5em; color: #444;">Chapter 1: Loomings</h2>
+<p style="text-align: justify;">
+Call me <span style="font-weight: bold;">Ishmael</span>. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people’s hats off—then, I account it high time to get to sea as soon as I can.</p>
+ <p style="text-align: justify;">
+This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.</p>
+<p style="text-align: justify;">Excerpt from <i><strong>Moby-Dick</strong></i>, published in 1851.</p>
+<p style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #666;">Note: <em>This website is still being emproved</em></p>`;
+   return (editor.value = text, content.innerHTML = editor.value, title.value = book);
+}
 
     // Load content from localStorage
     function loadContent() {
@@ -129,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
             editor.value = editorContent || "";
             content.innerHTML = editorContent || "";
         } else {
-            alert("No content found in Local Storage!");
+         return story();
         }
     }
 
