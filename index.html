@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>Minix Text Editor</title>
+</head>
+<body>
+    <div id="title-contents">
+        <input id="title" type="text" placeholder="file name..." class="text">
+        <span>
+            <button type="button" id="trash" class="material-symbols-outlined">delete</button>
+            <button type="button" class="material-symbols-outlined disabled" id="mic">mic</button>
+            <button type="button" class="material-symbols-outlined" id="edit_note">edit</button>
+        </span>
+    </div>
+
+    <textarea id="editor" class="text"></textarea>
+    
+    <div id="content">
+        <!-- This element displays rendered editor contents -->
+    </div>
+    
+    <button type="button" class="material-symbols-outlined disabled" id="download">download</button>   
+</body>
+<script src="speech.js"></script>
+</html>
